@@ -1,0 +1,24 @@
+/*
+ 파일이름: 
+ 작성자:
+ 작성일: 2022년 6월 23일
+ 목적:
+ */
+
+class BlockComment {
+	public static void main(String[] args) {
+		// 단순 정수 출력
+		System.out.println(7);
+		
+		System.out.println(3.15);
+		System.out.println("3 + 5 = " + 8);
+		System.out.println(3.15 + "는 실수입니다.");
+		System.out.println("3 + 5" + "의 연산 결과는 8입니다.");
+		// 덧셈 결과 출력
+		System.out.println(3 + 5);
+	}
+}
+		
+public class CC {
+
+}
