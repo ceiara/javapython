@@ -1,4 +1,4 @@
-def aaa(name,age);
+def aaa(name,age):
     print(name, ' hello')
     print(age)
 
