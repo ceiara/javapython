@@ -18,7 +18,10 @@ for i in range(1,10):
 
 # 문제 4. "반갑습니다"를 여러 번 출력하는 greet이라는 이름의 함수를 만들어보자. 단, 몇 번 출력할지는 프로그램 사용자에게 묻고 입력받는 형태로 작성하자
 def greet():
-    a =  input("인사를 몇 번 할까요?")
+    a = input("인사를 몇 번 할까요?")
     print(a)
-    for i  in range(a):
-        print("반갑습니다."*a)
+    b = eval(a)
+    for i in range(b):
+        print("반갑습니다.")
+
+greet()
