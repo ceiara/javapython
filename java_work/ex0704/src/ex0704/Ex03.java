@@ -9,10 +9,10 @@ public class Ex03 {
 	 * 2^5 = 2*2*2*2*2*1
 	 */
 	public static void main(String[] args) {
-		doA(3);
-		//System.out.println("result = "+result);
-		//result = doA(5);
-		//System.out.println("result = "+result);
+		int result = doA(3);
+		System.out.println("result = "+result);
+		result = doA(5);
+		System.out.println("result = "+result);
 	}
 	/*
 	 * doA(3) 

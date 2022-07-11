@@ -15,5 +15,5 @@ public class test06_2_2 {
 		
 		
 	}
-}
+}  
 	
