@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+import pymysql
 
 app = Flask(__name__,static_folder='static', template_folder='templates')
 
@@ -21,7 +22,17 @@ def index():
     aa = "aaa 입니다"
     return render_template("index.html", key1=aa)
 
-@app.route("/img/<aa>")
+@app.route("/insert")
+def insert():
+    con = pymysql.connect(host="localhost",user="root",passwd="1234",database="javatest",charset="utf8")
+    cur = con.cursor()
+
+    cur.execute("insert into fish(name,length,weight)values('bream',45,650);")
+    con.commit()
+    con.close()
+    return "aa"
+
+@app.route("/img/<int:aa>")
 def imgdown(aa):
     print(aa)
     img = BytesIO()
