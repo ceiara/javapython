@@ -4,10 +4,8 @@ public class Ex01 {
 
 	public static void main(String[] args) {
 		
-		int a = 0;
-		int b = 0;
-		boolean result;
+		int num1 = 50;
+		int num2 = 100;
 		
-		result = ((a +=10) > 0) && ()
 	}
 }
