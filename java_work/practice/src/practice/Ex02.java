@@ -9,6 +9,6 @@ public class Ex02 {
 	}
 	
 	public static void main(String[] args) {
-		result(8);
+		System.out.println(result(8));
     }
 }

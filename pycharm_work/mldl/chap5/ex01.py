@@ -84,7 +84,7 @@ print(mydata_target)
 import matplotlib.pyplot as plt
 from sklearn.tree import plot_tree
 
-plt.figure(figsize=(10, 7))+
-#plot_tree(dt, max_depth=1, filled=True, feature_names=['alcohol', 'sugar', 'pH'])
-#plt.show()
+plt.figure(figsize=(10, 7))
+# plot_tree(dt, max_depth=1, filled=True, feature_names=['alcohol', 'sugar', 'pH'])
+plt.show()
 

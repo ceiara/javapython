@@ -1,3 +1,5 @@
+import numpy as np
+
 x = np.array([i for i in range(30, 50, 2)])
 y = np.array([x ** 2 + x * 1.5 + 5])
 
