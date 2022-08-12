@@ -1,3 +1,4 @@
+from itertools import count
 from matplotlib.patches import ConnectionPatch
 import numpy as np 
 import pandas as pd
@@ -6,6 +7,7 @@ import matplotlib.pyplot as plt
 plt.style.use("seaborn-ticks")
 data = pd.read_excel('static/data/carprice/carprice.xlsx')
 
+# 막대그래프
 # ta = data.groupby('년식').mean()
 # print(ta)
 # print(type(ta))
@@ -22,6 +24,7 @@ data = pd.read_excel('static/data/carprice/carprice.xlsx')
 # # plt.show()
 # plt.savefig('x3_y1.png')
 
+# 년식별 차 종류 count
 # ta2 = data.groupby("년식")['종류'].sum()
 # print(ta2)
 # str_count1 = ta2[2015].count('대형')
@@ -43,54 +46,38 @@ data = pd.read_excel('static/data/carprice/carprice.xlsx')
 #     '2015': [22,28,0,4]
 # }
 
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(9, 5))
-fig.subplots_adjust(wspace=0)
+#년도 count
+# ta = data.groupby('년식').count()
+# print(ta)
 
-overall_ratios = [.0563, .0563, .0423, .0845, .7606]
-labels = ['2011', '2012', '2013', '2014', '2015']
-explode = [0, 0, 0, 0, 0.1]
+fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
 
-angle = -180 * overall_ratios[0]
-wedges, *_ = ax1.pie(overall_ratios, autopct='%1.1f%%', startangle=angle,
-                     labels=labels, explode=explode)
+recipe = ["54 대 2015",
+          "6 대 2014",
+          "3 대 2013",
+          "4 대 2012"
+          "4 대 2011"]
 
-age_ratios = [.4074, .5185, 0, .0741]
-age_labels = ['sled', 'mid-sized', 'submidsize', 'compact']
-bottom = 1
-width = .2
+data = [float(x.split()[0]) for x in recipe]
+ingredients = [x.split()[-1] for x in recipe]
 
-for j, (height, label) in enumerate(reversed([*zip(age_ratios, age_labels)])):
-    bottom -= height
-    bc = ax2.bar(0, height, width, bottom=bottom, color='C0', label=label,
-                 alpha=0.1 + 0.25 * j)
-    ax2.bar_label(bc, labels=[f"{height:.0%}"], label_type='center')
 
-ax2.set_title('Size of Car')
-ax2.legend()
-ax2.axis('off')
-ax2.set_xlim(- 2.5 * width, 2.5 * width)
+def func(pct, allvals):
+    absolute = int(np.round(pct/100.*np.sum(allvals)))
+    return "{:.1f}%\n({:d})".format(pct, absolute)
 
-# use ConnectionPatch to draw lines between the two plots
-theta1, theta2 = wedges[0].theta1, wedges[0].theta2
-center, r = wedges[0].center, wedges[0].r
-bar_height = sum(age_ratios)
 
-# draw top connecting line
-x = r * np.cos(np.pi / 180 * theta2) + center[0]
-y = r * np.sin(np.pi / 180 * theta2) + center[1]
-con = ConnectionPatch(xyA=(-width / 2, bar_height), coordsA=ax2.transData,
-                      xyB=(x, y), coordsB=ax1.transData)
-con.set_color([0, 0, 0])
-con.set_linewidth(4)
-ax2.add_artist(con)
+wedges, texts, autotexts = ax.pie(data, autopct=lambda pct: func(pct, data),
+                                  textprops=dict(color="w"))
 
-# draw bottom connecting line
-x = r * np.cos(np.pi / 180 * theta1) + center[0]
-y = r * np.sin(np.pi / 180 * theta1) + center[1]
-con = ConnectionPatch(xyA=(-width / 2, 0), coordsA=ax2.transData,
-                      xyB=(x, y), coordsB=ax1.transData)
-con.set_color([0, 0, 0])
-ax2.add_artist(con)
-con.set_linewidth(4)
+ax.legend(wedges, ingredients,
+          title="Year",
+          loc="center left",
+          bbox_to_anchor=(1, 0, 0.5, 1))
+
+plt.setp(autotexts, size=6, weight="bold")
+
+ax.set_title("The number of Car by Year")
 
 # plt.show()
+plt.savefig('year of car.png')
