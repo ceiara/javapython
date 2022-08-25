@@ -5,43 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <!-- JavaScript Bundle with Popper -->
+    <link href="../static/css/mybootstrap.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
         *{
             font-family: 'Roboto', sans-serif;
         }
+        @media (min-width: 1200px) {
+        .container{
+            max-width: 850px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>당뇨병확인</h1>
-        <p>
-            당뇨여부 = <h3 class="text-danger">{{당뇨여부}}</h3>
-        </p>
-        <div>
-            <form method="post">
-                임신수치
-                <input class="form-control" type="text" name="a" value="{{a}}">
-                글루코스(탄수화물 화합물)
-                <input class="form-control" type="text" name="b" value="148">
-                혈압
-                <input class="form-control" type="text" name="c" value="72">
-                피부두께
-                <input class="form-control" type="text" name="d" value="35">
-                인슐린
-                <input class="form-control" type="text" name="e" value="0">
-                BMI 
-                <input class="form-control" type="text" name="f" value="{{f}}">
-                가족력
-                <input class="form-control" type="text" name="g" value="0.6">
-                나이
-                <input class="form-control" type="text" name="age" value="50">
-                <input class="btn btn-secondary m-3" type="submit" value="당뇨확인">
-            </form>
+    <div class="container" style="margin-top: 70px;">
+        <ul class="nav" style="margin-left: 4px;">
+            <li class="nav-item border border-bottom-0 rounded-top bg-warning">
+              <a class="nav-link active link-dark" aria-current="page" href="/">검사</a>
+            </li>
+            <li class="nav-item border border-bottom-0 rounded-top bg-warning">
+              <a class="nav-link link-dark" href="/check">그래프</a>
+            </li>
+            <li class="nav-item border border-bottom-0 rounded-top bg-warning">
+              <a class="nav-link link-dark" href="/pregnancy">임신</a>
+            </li>
+          </ul>
+        <div class="border border-warning border-3 rounded " style="display: flex;flex-direction: column;align-items: center;">
+            <h1 style="margin-top: 60px; margin-bottom: 30px;">당뇨병확인</h1>
+            <div class="mb-3" style="display: flex; align-items: center;">
+                <p style="margin:0">
+                    당뇨여부 = <h3 class="text-danger" style="margin-left: 10px;">{{당뇨여부}}</h3>
+                </p>    
+            </div>
+        
+            <div>
+                <form style="width: 400px;" method="post">
+                    임신수치
+                    <input class="form-control mb-2" type="text" name="a" value="{{a}}">
+                    글루코스(탄수화물 화합물)
+                    <input class="form-control mb-2" type="text" name="b" value="{{b}}">
+                    혈압 
+                    <input class="form-control mb-2" type="text" name="c" value="{{c}}">
+                    피부두께
+                    <input class="form-control mb-2" type="text" name="d" value="{{d}}">
+                    인슐린
+                    <input class="form-control mb-2" type="text" name="e" value="{{e}}">
+                    BMI 
+                    <input class="form-control mb-2" type="text" name="f" value="{{f}}">
+                    가족력
+                    <input class="form-control mb-2" type="text" name="h" value="{{h}}">
+                    나이 
+                    <input class="form-control" type="text" name="age" value="{{age}}">
+                    <div style="display: flex;justify-content: center;">
+                        <input class="btn btn-secondary m-3" type="submit" value="당뇨확인">
+                    </div>
+                </form>
+            </div>
+            <p>
+                <button class="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    정상수치
+                </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body" style="width: 500px;">
+                    임신: 0-13 / 글루코스(탄수화물 화합물): 0-179 / 혈압: 44-108 / 피부두께: 8-60 / 인슐린: 0-680 / BMI: 18.2-57.3 / 가족력: 0.085-1.699
+                </div>
+            </div>
         </div>
     </div>
     

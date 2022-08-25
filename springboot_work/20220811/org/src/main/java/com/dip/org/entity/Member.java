@@ -23,4 +23,6 @@ public class Member {
     private String gender;
     private LocalDateTime regdate;
 
+    private String password;
+    private String name;
 }

@@ -1,0 +1,18 @@
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+
+$border-radius:0;
+
+$body-bg: rgba(178, 197, 234, 0.253);
+$body-color: rgb(0, 0, 0);
+
+$theme-colors: (
+  "primary": #135793,
+);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+// scss -> css
