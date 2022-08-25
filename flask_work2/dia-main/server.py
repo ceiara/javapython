@@ -42,4 +42,4 @@ def graph():
     return render_template("pregnancy.html")
 
 
-app.run(debug=True)
+app.run(debug=True,host="0.0.0.0",port=5000)
