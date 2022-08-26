@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for
 from fileutils import myfile
 import pymysql
 
@@ -24,16 +24,56 @@ def index():
 def member():
     db = pymysql.connect(
         host="localhost",
-        user='do1',
-        password='do1',
+        user='root',
+        password='1234',
         charset='utf8',
         database='python')
     cur = db.cursor()
     cur.execute('select * from member')
     rs = cur.fetchall()
     cur.close()
+    print(rs)
     return render_template("member.html", rs=rs)
 
+@app.route("/memberdelete/<id>")
+def memberdelete(id):
+        db = pymysql.connect(
+                host="localhost",
+                user='root',
+                password='1234',
+                charset='utf8',
+                database='python')
+        cur = db.cursor()
+        cur.execute(f'''delete from member where id = {id}''')
+        db.commit()
+        cur.close()
+
+        return render_template("memberdel.html")
+
+@app.route("/memberupdateform/<id>", methods=['GET', 'POST'])
+def memberupdateform(id):
+    if request.method == 'GET':
+        print('get',id)
+        return render_template("memberupdateform.html")
+    elif request.method == 'POST':
+        email = request.form['email']
+        pwd = request.form['pwd']
+        name = request.form['name']
+        db = pymysql.connect(
+            host="localhost",
+            user='root',
+            password='1234',
+            charset='utf8',
+            database='python')
+        cur = db.cursor()
+        cur.execute(f'''update member 
+                        set email="{email}",
+                        password="{pwd}",
+                        name="{name}" where id={id}
+                        ''')
+        db.commit()
+        cur.close()
+        return redirect(url_for("member"))
 
 # GET: 주소들어왔을때 / POST: submit button
 
@@ -41,15 +81,15 @@ def member():
 def memberform():
     if request.method == 'GET':
         print('get')
-        pass
+        return render_template("memberform.html")
     elif request.method == 'POST':
         email = request.form['email']
         pwd = request.form['pwd']
         name = request.form['name']
         db = pymysql.connect(
             host="localhost",
-            user='do1',
-            password='do1',
+            user='root',
+            password='1234',
             charset='utf8',
             database='python')
         cur = db.cursor()
@@ -59,7 +99,7 @@ def memberform():
                     ('{email}', '{pwd}', '{name}', now())''')
         db.commit()
         cur.close()
-    return render_template("memberform.html")
+        return redirect(url_for("member"))
 
 
 @app.route("/KNeighbors", methods=['GET', 'POST'])
